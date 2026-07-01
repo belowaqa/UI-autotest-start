@@ -1,18 +1,23 @@
-from playwright.sync_api import expect, Page
 import pytest
 
-@pytest.mark.ui
-def test_successful_registration(page: Page, user_data: dict[str, str]):
-        page.goto(
-            "https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration"
-        )
+from pages.dashboard_page import DashboardPage
+from pages.registration_page import RegistrationPage
 
-        page.locator("[data-testid='registration-form-email-input'] input").fill(user_data['email'])
-        page.locator("[data-testid='registration-form-username-input'] input").fill(user_data['username'])
-        page.locator("[data-testid='registration-form-password-input'] input").fill(user_data['password'])
-        page.locator("[data-testid='registration-page-registration-button']").click()
-        expect(page).to_have_url("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/dashboard")
-        dashboard_title = page.locator("[data-testid='dashboard-toolbar-title-text']")
-        expect(dashboard_title).to_be_visible()
-        expect(dashboard_title).to_have_text("Dashboard")
-        # input("Нажмите Enter для завершения...")
+
+@pytest.mark.ui
+def test_successful_registration(
+        user_data: dict[str, str],
+        dashboard_page: DashboardPage,
+        registration_page: RegistrationPage,
+):
+    registration_page.open_page()
+    registration_page.check_visible_registration_form()
+    registration_page.fill_registration_form(
+        email=user_data["email"],
+        username=user_data["username"],
+        password=user_data["password"],
+    )
+    registration_page.click_registration_button()
+
+    dashboard_page.check_opened()
+    dashboard_page.check_visible_toolbar_title()

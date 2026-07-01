@@ -9,10 +9,10 @@ class DashboardPage(BasePage):
         super().__init__(page)
 
         self.toolbar_title = page.locator("[data-testid='dashboard-toolbar-title-text']")
-        
-        def check_opened(self) -> None:
-            self.check_current_url(self.URL)
 
-        def check_visible_toolbar_title(self) -> None:
-            expect(self.toolbar_title).to_be_visible()
-            expect(self.toolbar_title).to_have_text("Dashboard")
+    def check_opened(self) -> None:
+        self.check_current_url(self.URL)
+
+    def check_visible_toolbar_title(self) -> None:
+        expect(self.toolbar_title).to_be_visible()
+        expect(self.toolbar_title).to_have_text("Dashboard")

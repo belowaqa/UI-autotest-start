@@ -10,7 +10,7 @@ class RegistrationPage(BasePage):
         self.email_input = page.locator("[data-testid='registration-form-email-input'] input")
         self.username_input = page.locator("[data-testid='registration-form-username-input'] input")
         self.password_input = page.locator("[data-testid='registration-form-password-input'] input")
-        self.registration_button = page.locator("[data-testid='registration-page-registration-button'] input")
+        self.registration_button = page.locator("[data-testid='registration-page-registration-button']")
 
     def open_page(self) -> None:
         super().open(self.URL)
