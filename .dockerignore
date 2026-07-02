@@ -1,0 +1,11 @@
+.venv/
+venv/
+__pycache__/
+.pytest_cache/
+.pytest/
+tests_results/
+htmlcov/
+allure-results/
+allure-report/
+.git/
+.gitignore
